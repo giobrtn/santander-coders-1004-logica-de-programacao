@@ -55,5 +55,36 @@ const mediaArray = arrayValores.reduce((acumulador, valor) => acumulador + valor
 console.log(`A média dos valores do array é: ${mediaArray}`);
 
 // 7- Crie uma função que retorne a data e hora atuais no formato legível: "Dia/Mês/Ano Hora:Minuto:Segundo". 
+function getDataAtual() {
+    const agora = new Date();
 
-// 8- Implemente um programa que encontre o maior valor em um array usando a função Math.max(). 9- Escreva uma função que gere um número inteiro aleatório entre dois valores dados como argumentos. 10- Crie um programa que verifique se um número dado pelo usuário é um número primo usando uma função.
+    const dia = String(agora.getDate()).padStart(2, '0');
+    const mes = String(agora.getMonth() + 1).padStart(2, '0');
+    const ano = String(agora.getFullYear());
+    const hora = String(agora.getHours()).padStart(2, '0');
+    const minuto = String(agora.getMinutes()).padStart(2, '0');
+    const segundo = String(agora.getSeconds()).padStart(2, '0');
+
+    const stringHora = `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`
+    return stringHora;
+}
+
+console.log(getDataAtual())
+
+
+// 8- Implemente um programa que encontre o maior valor em um array usando a função Math.max(). 
+
+function maiorValorArray(array) {
+    const maiorValor = Math.max(...array);
+    return maiorValor;
+}
+
+const arrayNumeros = [1, 2, 5, 100, 20, 400, 353, 1000];
+const maiorNumero = maiorValorArray(arrayNumeros);
+console.log("O maior valor no array é: " + maiorNumero); 
+
+// 9- Escreva uma função que gere um número inteiro aleatório entre dois valores dados como argumentos. 
+
+
+
+// 10- Crie um programa que verifique se um número dado pelo usuário é um número primo usando uma função.
