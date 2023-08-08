@@ -86,6 +86,54 @@ console.log("O maior valor no array é: " + maiorNumero);
 
 // 9- Escreva uma função que gere um número inteiro aleatório entre dois valores dados como argumentos. 
 
+function gerarAleatorio(min, max) {
+    const intervalo = max - min;
+    const numAleatorio = Math.floor(Math.random() * (intervalo + 1)) + min;
+    return numAleatorio;
+}
 
 
 // 10- Crie um programa que verifique se um número dado pelo usuário é um número primo usando uma função.
+
+
+
+// function numeroPrimo(num) {
+//     for (let divisor = 2 ; divisor < num; divisor++)
+//     if (num % divisor == 0) return console.log(`O número ${num} não é primo.`);
+//     return console.log(`O número ${num} é primo.`);
+// }
+// let numeroInputUsuario = parseInt(prompt('Digite um número: '));
+// numeroPrimo(numeroInputUsuario)
+
+//Coerção e Tipos de Dados:
+
+//11- Declare uma variável com valor "5" (string) e outra variável com valor 2 (número). Multiplique as duas variáveis e explique o resultado. 
+
+const varString = "5";
+const varNumero = 2;
+
+let resultadoMultiplicacao = varString * varNumero;
+console.log(resultadoMultiplicacao);
+// A multiplicação ocorre pois o javascript é uma linguagem dinamica e ele tenta ajusta os dados conforme a situação utilizando a coerção. Nesse caso é uma coerção implicita, onde não foi usado nenhum artificio da linguagem pra converter os dados.
+
+//12- Converta a string "123" em um número inteiro e armazene-o em uma variável. 
+
+let stringTeste = "123";
+let numeroInteiro = parseInt(numeroInteiro);
+console.log(numeroInteiro);
+
+//13- Escreva um programa que adicione um número e uma string. 
+
+let varStr = "O número é";
+let varNum = 5;
+let adicionarStringNum = varStr + varNum;
+console.log(adicionarStringNum);
+
+// 14- Explique o resultado e discuta a coerção que ocorre. 
+// Ocorre uma coerção implícita assim como ocorre no ex 11, onde o javascript  ajusta os dados para caber na situação. Como a string não pode ser convertida pra numero, ele converteu o numero pra string.
+
+// 15- Declare uma variável com o valor null e outra variável com o valor undefined. Verifique se são iguais em valor e tipo. 
+
+
+
+// 16- Crie um programa que determine se uma variável é do tipo função usando o operador typeof.
