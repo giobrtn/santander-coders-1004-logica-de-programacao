@@ -1,21 +1,21 @@
 // 1- Escreva um programa que calcule a área de um retângulo com base no comprimento e largura fornecidos pelo usuário.
 
-// let larguraRet = parseFloat(prompt('Insira a largura'));
-// let alturaRet = parseFloat(prompt('Insira a altura'));
+let larguraRet = parseFloat(prompt('Insira a largura'));
+let alturaRet = parseFloat(prompt('Insira a altura'));
 
-// let area = alturaRet * larguraRet;
+let area = alturaRet * larguraRet;
 
-// console.log(`A área do retângulo é: ${area}`);
+console.log(`A área do retângulo é: ${area}`);
 
 // 2- Crie um programa que determine se um número é par ou ímpar utilizando o operador de módulo (%).
 
-// let numeroUsuario = parseInt(prompt('Insira o número desejado'));
+let numeroUsuario = parseInt(prompt('Insira o número desejado'));
 
-// if (numeroUsuario % 2 === 0) {
-//     console.log(`O número ${numeroUsuario} é par`);
-// } else {
-//     console.log(`O número ${numeroUsuario} é impar`);
-// }
+if (numeroUsuario % 2 === 0) {
+    console.log(`O número ${numeroUsuario} é par`);
+} else {
+    console.log(`O número ${numeroUsuario} é impar`);
+}
 
 // 3- Escreva uma função que verifique se uma string fornecida pelo usuário contém a palavra "JavaScript"
 
@@ -96,14 +96,13 @@ function gerarAleatorio(min, max) {
 // 10- Crie um programa que verifique se um número dado pelo usuário é um número primo usando uma função.
 
 
-
-// function numeroPrimo(num) {
-//     for (let divisor = 2 ; divisor < num; divisor++)
-//     if (num % divisor == 0) return console.log(`O número ${num} não é primo.`);
-//     return console.log(`O número ${num} é primo.`);
-// }
-// let numeroInputUsuario = parseInt(prompt('Digite um número: '));
-// numeroPrimo(numeroInputUsuario)
+function numeroPrimo(num) {
+    for (let divisor = 2 ; divisor < num; divisor++)
+    if (num % divisor == 0) return console.log(`O número ${num} não é primo.`);
+    return console.log(`O número ${num} é primo.`);
+}
+let numeroInputUsuario = parseInt(prompt('Digite um número: '));
+numeroPrimo(numeroInputUsuario)
 
 //Coerção e Tipos de Dados:
 
@@ -119,12 +118,12 @@ console.log(resultadoMultiplicacao);
 //12- Converta a string "123" em um número inteiro e armazene-o em uma variável. 
 
 let stringTeste = "123";
-let numeroInteiro = parseInt(numeroInteiro);
+let numeroInteiro = parseInt(stringTeste);
 console.log(numeroInteiro);
 
 //13- Escreva um programa que adicione um número e uma string. 
 
-let varStr = "O número é";
+let varStr = "O número é ";
 let varNum = 5;
 let adicionarStringNum = varStr + varNum;
 console.log(adicionarStringNum);
@@ -134,6 +133,80 @@ console.log(adicionarStringNum);
 
 // 15- Declare uma variável com o valor null e outra variável com o valor undefined. Verifique se são iguais em valor e tipo. 
 
+var varNull = null;
+var varUndefined = undefined;
+
+let comparacaoNullUnd = varNull === varUndefined;
+console.log(comparacaoNullUnd);
 
 
 // 16- Crie um programa que determine se uma variável é do tipo função usando o operador typeof.
+
+function ehFuncao(variavel) {
+    return typeof variavel === 'function';
+}
+
+const funcao = function() {}
+console.log(ehFuncao(funcao));
+
+// Operadores Matemáticos e Lógicos:
+
+//18- Escreva um programa que calcule o resultado da expressão: (10 + 5) * 3 / 20. 
+
+const resultadoExpressao = (10 + 5) * 3 / 20;
+console.log(resultadoExpressao);
+
+//19- Crie uma função que verifique se um número é positivo e ímpar ao mesmo tempo. 
+
+function ehPositivoImpar(number){
+    return number > 0 && number % 2 !== 0;
+}
+console.log(ehPositivoImpar(2))
+
+//20- Implemente um programa que determine se um ano fornecido pelo usuário é bissexto ou não, considerando as regras: (a) Anos divisíveis por 4 são bissextos; (b) Anos divisíveis por 100 não são bissextos, a menos que também sejam divisíveis por 400. 
+
+function ehBissexto(ano){
+    if (ano % 4 === 0 && ano % 100 !== 0 || ano % 400 === 0) {
+        return true;
+    } return false;
+}
+const ano = prompt("Digite um ano válido: ");
+
+if (ehBissexto(ano))  {
+    console.log(`O ano ${ano} é bissexto.`)
+}else  {
+    console.log(`O ano ${ano} não é bissexto.`)
+}
+
+// 21- Escreva uma função que determine se uma pessoa tem permissão para entrar em um clube: idade mínima de 18 anos e não estar na lista de membros banidos (use operadores lógicos). 
+const usuario = {
+    nome: "Joao",
+    idade: 18,
+    permissao: "banido"
+}
+function ehMaiorPermitido(idade, permissao){
+    if (idade >= 18 && permissao !== "banido" ) {
+        return console.log("Entrada permitida");
+    } return console.log("Entrada bloqueada, usuario banido");
+}
+
+ehMaiorPermitido(usuario.idade, usuario.permissao)
+
+//22- Crie um programa que simule um sistema de login. Peça ao usuário um nome de usuário e uma senha, e verifique se correspondem aos valores esperados.
+const dataBase = [
+    { username: 'usuario123', password: 'jorginhomeemprestaa12'}
+]
+function fazerLogin(){
+    const username = prompt("Digite seu nome de usuário: ")
+    const password = prompt("Digite sua senha: ")
+
+    const userFound = dataBase.find(user => user.username === username && user.password === password)
+
+    if (userFound) {
+        console.log(`Logado com sucesso. Bem vindo, ${username}`)
+    } else {
+        console.log(`Erro ao logar-se. Usuário ou senha incorretos, tente novamente.`)
+    }
+}
+
+fazerLogin()
