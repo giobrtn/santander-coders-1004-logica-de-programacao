@@ -54,7 +54,8 @@ const arrayValores = [10, 5, 2, 8, 9];
 const mediaArray = arrayValores.reduce((acumulador, valor) => acumulador + valor, 0) / arrayValores.length;
 console.log(`A média dos valores do array é: ${mediaArray}`);
 
-// 7- Crie uma função que retorne a data e hora atuais no formato legível: "Dia/Mês/Ano Hora:Minuto:Segundo". 
+// 7- Crie uma função que retorne a data e hora atuais no formato legível: "Dia/Mês/Ano Hora:Minuto:Segundo".
+
 function getDataAtual() {
     const agora = new Date();
 
