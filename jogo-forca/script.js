@@ -1,5 +1,7 @@
 // Lista de palavras para o jogo
-const listaPalavras = ['gato', 'cachorro', 'elefante', 'leao', 'tigre', 'girafa'];
+// const listaPalavras = ['gato', 'cachorro', 'elefante', 'leao', 'tigre', 'girafa'];
+const listaPalavras = ['gato'];
+let letrasTentadas = [];
 
 // Escolhe uma palavra aleatória da lista
 const indiceAleatorio = Math.floor(Math.random() * listaPalavras.length);
@@ -16,68 +18,74 @@ const botaoAdivinhacao = document.getElementById('botao-adivinhacao');
 const mensagem = document.getElementById('mensagem');
 const botaoRecomecar = document.getElementById('botao-recomeçar');
 
+// Inicializa o valor no HTML de tentaitvas restantes
 tentativasRestantes.innerText = tentativas;
+
 // Inicializa o display da palavra com underscores
 let arrayExibicao = new Array(arrayPalavra.length).fill('_');
 displayPalavra.textContent = arrayExibicao.join(' ');
 
-
-// let tentativas = 6;
-
-// Lidar com o botão de adivinha
-botaoAdivinhacao.addEventListener('click', () => {
-    const adivinhacao = entradaAdivinhacao.value.toLowerCase();
-
+// Função de verificação
+function verificar(adivinhacao) {
     // Verificar se a entrada é uma letra
     if (!/^[a-zA-Z]$/.test(adivinhacao)) {
-        mensagem.textContent = 'Por favor, insira uma letra válida.';
-        return;
+        return [-1, 'Por favor, insira uma letra válida.'];
     }
 
     // Verificar se a letra já foi adivinhada
-    if (arrayExibicao.includes(adivinhacao)) {
-        mensagem.textContent = 'Você já adivinhou essa letra.';
-        return;
+    if (letrasTentadas.includes(adivinhacao)) {
+        return [-1, 'Você já adivinhou/tentou essa letra.'];
     }
+    letrasTentadas.push(adivinhacao)
 
     // Verificar se a letra está na palavra
-    let encontrada = false;
+    let changed = false
     for (let i = 0; i < arrayPalavra.length; i++) {
         if (arrayPalavra[i] === adivinhacao) {
             arrayExibicao[i] = adivinhacao;
-            encontrada = true;
+            changed = true;
         }
     }
+    console.log(arrayExibicao)
+    return [changed, changed ? 'Boa! Continue adivinhando.' : 'Tente novamente.'];
+}
+
+// Função de processar tentativa
+function processarTentativa(msg) {
+    tentativas--;
+    tentativasRestantes.textContent = tentativas;
+
+    if (tentativas === 0) {
+        msg = 'Você perdeu! A palavra era: ' + palavraEscolhida;
+        entradaAdivinhacao.disabled = true;
+        botaoAdivinhacao.disabled = true;
+    }
+
+    if (arrayExibicao.join('') === palavraEscolhida) {
+        msg = 'Parabéns! Você acertou a palavra!';
+        entradaAdivinhacao.disabled = true;
+        botaoAdivinhacao.disabled = true;
+    }
+
+    return msg;
+}
+
+// Função de adivinhar
+function adivinhar() {
+    const adivinhacao = entradaAdivinhacao.value.toLowerCase();
+    // Limpar a entrada
+    entradaAdivinhacao.value = '';
+
+    // Atualizar as tentativas restantes
+    let result = verificar(adivinhacao)
 
     // Atualizar o display da palavra
     displayPalavra.textContent = arrayExibicao.join(' ');
 
-    // Atualizar as tentativas restantes
-    if (!encontrada) {
-        tentativas--;
-        tentativasRestantes.textContent = tentativas;
-
-        if (tentativas === 0) {
-            mensagem.textContent = 'Você perdeu! A palavra era: ' + palavraEscolhida;
-            entradaAdivinhacao.disabled = true;
-            botaoAdivinhacao.disabled = true;
-        } else {
-            mensagem.textContent = 'Tente novamente.';
-        }
-    } else if (arrayExibicao.join('') === palavraEscolhida) {
-        mensagem.textContent = 'Parabéns! Você acertou a palavra!';
-        entradaAdivinhacao.disabled = true;
-        botaoAdivinhacao.disabled = true;
-    } else {
-        mensagem.textContent = 'Boa! Continue adivinhando.';
+    if (result[0] == -1) {
+        mensagem.textContent = result[1];
+        return
     }
-
-    // Limpar a entrada
-    entradaAdivinhacao.value = '';
-});
-
-
-
-botaoRecomecar.addEventListener('click', () => {
-    location.reload();
-});
+    result[1] = processarTentativa(result[1])
+    mensagem.textContent = result[1];   
+}
