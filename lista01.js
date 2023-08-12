@@ -193,14 +193,14 @@ function ehMaiorPermitido(idade, permissao){
 ehMaiorPermitido(usuario.idade, usuario.permissao)
 
 //22- Crie um programa que simule um sistema de login. Peça ao usuário um nome de usuário e uma senha, e verifique se correspondem aos valores esperados.
-const dataBase = [
+const database = [
     { username: 'usuario123', password: 'jorginhomeemprestaa12'}
 ]
 function fazerLogin(){
     const username = prompt("Digite seu nome de usuário: ")
     const password = prompt("Digite sua senha: ")
 
-    const userFound = dataBase.find(user => user.username === username && user.password === password)
+    const userFound = database.find(user => user.username === username && user.password === password)
 
     if (userFound) {
         console.log(`Logado com sucesso. Bem vindo, ${username}`)
