@@ -414,49 +414,299 @@ adivinharNumeroSecreto();
 
 // 27- Crie um programa que gere a sequência de números primos até um número fornecido pelo usuário.
 
-// 28- Escreva um código JavaScript que utilize um laço de repetição while para imprimir os números pares de 0 a 10.
+function ehPrimo(num) {
+    if (num <= 1) {
+        return false;
+    }
+    if (num <= 3) {
+        return true;
+    }
+    if (num % 2 === 0 || num % 3 === 0) {
+        return false;
+    }
+    let i = 5;
+    while (i * i <= num) {
+        if (num % i === 0 || num % (i + 2) === 0) {
+        return false;
+        }
+        i += 6;
+    }
+    return true;
+}
 
+function gerarSequenciaPrimos(limite) {
+    const sequenciaPrimos = [];
+    for (let num = 2; num <= limite; num++) {
+        if (ehPrimo(num)) {
+        sequenciaPrimos.push(num);
+        }
+    }
+    return sequenciaPrimos;
+}
+
+function principal() {
+    const limiteUsuario = parseInt(prompt("Digite um número limite:"));
+    const primos = gerarSequenciaPrimos(limiteUsuario);
+    console.log(`Sequência de números primos até ${limiteUsuario}:`);
+    console.log(primos);
+}
+
+principal();
+
+// 28- Escreva um código JavaScript que utilize um laço de repetição while para imprimir os números pares de 0 a 10.
+let numero = 0;
+while (numero <= 10) {
+    if (numero % 2 === 0) {
+        console.log(numero)
+    }
+    numero++;
+}
 // 29- Escreva um código JavaScript que solicite ao usuário um número e utilize um laço de repetição do-while para verificar se o número inserido é uma potência de 2.
 
+function ehPotenciaDeDois(num) {
+    return (num > 0) && ((num & (num - 1)) === 0);
+}
+
+const numeroInput = parseInt(prompt("Digite um número para verificar se é uma potência de 2:"));
+
+if (ehPotenciaDeDois(numero)) {
+    console.log(`${numero} é uma potência de 2.`);
+} else {
+    console.log(`${numero} não é uma potência de 2.`);
+}
 // 30- Escreva um código JavaScript que utilize um laço de repetição while para calcular a soma dos números de 1 a 100 e exiba o resultado.
+
+let numero = 1;
+let soma = 0;
+
+while (numero <= 100) {
+    soma += numero;
+    numero++;
+}
+
+console.log("A soma dos números de 1 a 100 é:", soma);
 
 // Condicionais
 // 31- Verificação de vogal ou consoante
 
 // Peça ao usuário para digitar uma letra. Use uma estrutura condicional para verificar se a letra é uma vogal ou uma consoante. Exiba uma mensagem indicando se a letra é uma vogal ou consoante.
 
+const letra = prompt("Digite uma letra:");
+
+if (letra.length === 1) {
+    const lowerCaseLetra = letra.toLowerCase();
+
+    if (lowerCaseLetra === "a" || lowerCaseLetra === "e" || lowerCaseLetra === "i" || lowerCaseLetra === "o" || lowerCaseLetra === "u") {
+    console.log(`A letra ${letra} é uma vogal.`);
+    } else {
+        console.log(`A letra ${letra} é uma consoante.`);
+    }
+} else {
+    console.log("Por favor, digite apenas uma letra.");
+}
+
 // 32- Calculadora simples
 
 // Peça ao usuário para digitar dois números e uma operação matemática (+, -, *, /). Use uma estrutura condicional para realizar a operação selecionada nos números dados. Exiba o resultado da operação.
+
+const numero1 = parseFloat(prompt("Digite o primeiro número:"));
+const numero2 = parseFloat(prompt("Digite o segundo número:"));
+const operacao = prompt("Digite a operação matemática (+, -, *, /):");
+
+let resultado;
+
+if (operacao === "+") {
+    resultado = numero1 + numero2;
+} else if (operacao === "-") {
+    resultado = numero1 - numero2;
+} else if (operacao === "*") {
+  resultado = numero1 * numero2;
+} else if (operacao === "/") {
+    if (numero2 !== 0) {
+    resultado = numero1 / numero2;
+    } else {
+    console.log("Não é possível dividir por zero.");
+    process.exit(1);
+    }
+} else {
+    console.log("Operação inválida.");
+    process.exit(1);
+}
+
+console.log(`O resultado da operação ${numero1} ${operacao} ${numero2} é: ${resultado}`);
+
 
 // 33- Verificação de número primo
 
 // Peça ao usuário para digitar um número. Use uma estrutura condicional para verificar se o número é primo (divisível apenas por 1 e por ele mesmo). Exiba uma mensagem indicando se o número é primo ou não.
 
+function isPrimo(num) {
+    if (num <= 1) {
+        return false;
+    }
+    if (num <= 3) {
+        return true;
+    }
+    if (num % 2 === 0 || num % 3 === 0) {
+        return false;
+    }
+    let i = 5;
+    while (i * i <= num) {
+        if (num % i === 0 || num % (i + 2) === 0) {
+        return false;
+    }
+        i += 6;
+    }
+    return true;
+}
+
+const numero = parseInt(prompt("Digite um número:"));
+
+if (isPrimo(numero)) {
+    console.log(`${numero} é um número primo.`);
+} else {
+    console.log(`${numero} não é um número primo.`);
+}
+
 // 34- Conversão de temperatura
 
 // Peça ao usuário para digitar uma temperatura em graus Celsius. Use uma estrutura condicional para converter a temperatura para Fahrenheit ou Kelvin, de acordo com a escolha do usuário. Exiba o resultado da conversão.
+
+const temperaturaCelsius = parseFloat(prompt("Digite a temperatura em graus Celsius:"));
+const escolha = prompt("Escolha a unidade de conversão (Digite 'F' para Fahrenheit ou 'K' para Kelvin):");
+
+let temperaturaConvertida;
+
+if (escolha === 'F' || escolha === 'f') {
+  temperaturaConvertida = (temperaturaCelsius * 9/5) + 32;
+    console.log(`A temperatura convertida para Fahrenheit é: ${temperaturaConvertida.toFixed(2)} °F`);
+} else if (escolha === 'K' || escolha === 'k') {
+    temperaturaConvertida = temperaturaCelsius + 273.15;
+    console.log(`A temperatura convertida para Kelvin é: ${temperaturaConvertida.toFixed(2)} K`);
+} else {
+    console.log("Escolha inválida.");
+}
 
 // 35- Dia da semana por extenso
 
 // Peça ao usuário para digitar um número de 1 a 7 representando um dia da semana. Use uma estrutura condicional switch para exibir o nome completo do dia da semana correspondente ao número digitado.
 
+const numeroDia = parseInt(prompt("Digite um número de 1 a 7 para representar um dia da semana:"));
+
+let nomeDia;
+
+switch (numeroDia) {
+    case 1:
+        nomeDia = "Domingo";
+        break;
+    case 2:
+        nomeDia = "Segunda-feira";
+        break;
+    case 3:
+        nomeDia = "Terça-feira";
+        break;
+    case 4:
+        nomeDia = "Quarta-feira";
+        break;
+    case 5:
+        nomeDia = "Quinta-feira";
+        break;
+    case 6:
+        nomeDia = "Sexta-feira";
+        break;
+    case 7:
+        nomeDia = "Sábado";
+        break;
+    default:
+        nomeDia = "Dia inválido";
+}
+
+console.log(`O número ${numeroDia} corresponde ao dia da semana: ${nomeDia}`);
+
 // 36- Verificação de ano bissexto
 
 // Peça ao usuário para digitar um ano. Use uma estrutura condicional para verificar se o ano é bissexto (divisível por 4 e não por 100, exceto se for divisível por 400). Exiba uma mensagem indicando se o ano é bissexto ou não.
 
+const ano = parseInt(prompt("Digite um ano:"));
+
+if ((ano % 4 === 0 && ano % 100 !== 0) || ano % 400 === 0) {
+    console.log(`${ano} é um ano bissexto.`);
+} else {
+    console.log(`${ano} não é um ano bissexto.`);
+}
+
 // 37- Contador de vogais e consoantes
 
 // Peça ao usuário para digitar uma palavra ou frase. Use uma estrutura condicional para contar o número de vogais e consoantes na entrada. Exiba os resultados separadamente.
+function contarVogaisConsoantes(texto) {
+    const vogais = 'aeiouAEIOU';
+    let numVogais = 0;
+    let numConsoantes = 0;
+
+    for (let i = 0; i < texto.length; i++) {
+        const caractere = texto[i];
+        if (vogais.includes(caractere)) {
+        numVogais++;
+        } else if (caractere !== ' ' && /^[a-zA-Z]+$/.test(caractere)) {
+        numConsoantes++;
+        }
+    }
+
+    return [numVogais, numConsoantes];
+}
+
+const entrada = prompt("Digite uma palavra ou frase:");
+const [vogais, consoantes] = contarVogaisConsoantes(entrada);
+
+console.log(`Número de vogais: ${vogais}`);
+console.log(`Número de consoantes: ${consoantes}`);
 
 // 38- Verificação de número positivo, negativo ou zero
 
 // Peça ao usuário para digitar um número. Use uma estrutura condicional para verificar se o número é positivo, negativo ou zero. Exiba uma mensagem indicando a natureza do número.
+const numero = parseFloat(prompt("Digite um número:"));
+
+if (numero > 0) {
+    console.log(`${numero} é um número positivo.`);
+} else if (numero < 0) {
+    console.log(`${numero} é um número negativo.`);
+} else {
+    console.log(`${numero} é zero.`);
+}
 
 // 39- Sistema de bilhete de cinema
 
 // Peça ao usuário para digitar sua idade e se tem cartão de estudante (responda com "sim" ou "não"). Use uma estrutura condicional para determinar o preço do bilhete de cinema de acordo com as regras: menores de 18 anos pagam $5, estudantes pagam $8 e os demais pagam $10. Exiba o preço do bilhete.
 
+const idade = parseInt(prompt("Digite sua idade:"));
+const temCartaoEstudante = prompt("Você tem cartão de estudante? (Responda com 'sim' ou 'não'):").toLowerCase();
+
+let precoBilhete;
+
+if (idade < 18) {
+    precoBilhete = 5;
+} else if (temCartaoEstudante === "sim") {
+    precoBilhete = 8;
+} else {
+    precoBilhete = 10;
+}
+
+console.log(`O preço do bilhete de cinema é: $${precoBilhete}`);
+
 // 40- Verificação de palíndromo
 
 // Peça ao usuário para digitar uma palavra ou frase. Use uma estrutura condicional para verificar se a entrada é um palíndromo (lê-se igual de trás para frente e de frente para trás). Exiba uma mensagem indicando se a entrada é um palíndromo ou não.
+
+function ehPalindromo(texto) {
+    const textoFormatado = texto.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+    const textoInvertido = textoFormatado.split('').reverse().join('');
+    return textoFormatado === textoInvertido;
+}
+
+const entrada = prompt("Digite uma palavra ou frase:");
+
+if (ehPalindromo(entrada)) {
+    console.log(`"${entrada}" é um palíndromo.`);
+} else {
+    console.log(`"${entrada}" não é um palíndromo.`);
+}
