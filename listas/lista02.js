@@ -30,54 +30,387 @@ console.log(`A capital do ${pais} é ${capital}`)
 
 // 3- Crie um dicionário com nomes de frutas e seus preços. Escreva uma função que calcule o preço total de uma cesta de frutas.
 
+const precoFrutas = {
+    "maçã": 2.50,
+    "banana": 1.00,
+    "laranja": 1.80,
+    "uva": 3.2,
+    "morango": 4.5,
+}
+
+function calcularPrecoCesta(cesta) {
+    let total = 0;
+
+    for (let fruta in cesta) {
+        if (precoFrutas.hasOwnProperty(fruta)) {
+            total += cesta[fruta] * precoFrutas[fruta];
+        } else {
+            console.log(`A fruta ${fruta} não está no dicionário de preços.`)
+        }
+    } return total;
+}
+
+const minhaCesta = {
+    "maçã": 3,
+    "banana": 3,
+    "uva": 3,
+    "morango": 2,
+};
+
+const precoTotal = calcularPrecoCesta(minhaCesta);
+
 // 4- Crie um objeto que represente um livro com propriedades como título, autor, ano de publicação, etc. Crie uma função que imprima as informações do livro em um formato legível.
+
+const meuLivro = {
+    titulo: "Senhor dos Anéis",
+    autor: "J. R. R. Tolkien",
+    anoPublicacao: "1954",
+}
+
+function imprimirInformacoesDoLivro(livro) {
+    console.log(`Título: ${livro.titulo}`);
+    console.log(`Autor: ${livro.autor}`);
+    console.log(`Ano de Publicação: ${livro.anoPublicacao}`);
+}
 
 // Map:
 // 5- Dado um array de números, crie um novo array onde cada número seja elevado ao quadrado.
 
+const arrayNumeros = [1, 2, 3, 5, 10];
+
+function elevarQuadrado(numero) {
+    return numero * numero;
+}
+const numerosQuadrado = arrayNumeros.map(elevarQuadrado);
+
 // 6- Dado um array de palavras, crie um novo array com a primeira letra de cada palavra em maiúscula.
+
+
+const palavras = ["maçã", "banana", "laranja", "uva", "morango"];
+
+
+function capitalizarPrimeiraLetra(palavra) {
+    return palavra.charAt(0).toUpperCase() + palavra.slice(1);
+}
+
+
+const palavrasComPrimeiraLetraMaiuscula = palavras.map(capitalizarPrimeiraLetra);
+
+
+
 
 // 7- Crie um array de objetos representando produtos com propriedades como nome, preço e quantidade. Use o método map() para calcular o valor total de cada produto (preço * quantidade).
 
+const produtos = [
+    { nome: "Maçã", preco: 2.5, quantidade: 5 },
+    { nome: "Banana", preco: 1.0, quantidade: 8 },
+    { nome: "Laranja", preco: 1.8, quantidade: 3 },
+    { nome: "Uva", preco: 3.2, quantidade: 2 },
+    { nome: "Morango", preco: 4.5, quantidade: 4 }
+];
+
+
+const produtosComValorTotal = produtos.map(produto => {
+    return {
+        ...produto,
+        valorTotal: produto.preco * produto.quantidade
+    };
+});
+
+console.log(produtosComValorTotal);
+
 // 8- Converta um array de temperaturas em graus Celsius para Fahrenheit usando a fórmula (C * 9/5) + 32.
+
+const temperaturasCelsius = [0, 15, 19, 23, 31];
+
+function celsiusParaFahrenheit(temperaturasCelsius) {
+    return (temperaturasCelsius * 9/5) + 32;
+}
+const temperaturasFahrenheit = temperaturasCelsius.map(celsiusParaFahrenheit);
+console.log(temperaturasFahrenheit);
 
 // Reduce:
 // 9- Dado um array de números, use o método reduce() para calcular a soma de todos os elementos.
 
+const numerosReduce = [1, 2, 3, 4, 10]
+
+const soma = numerosReduce.reduce((acumulador, numero) => {
+    return acumulador + numero;
+
+}, 0);
+console.log(`A soma dos elementos é: ${soma}.`);
+
 // 10- Crie um array de strings e use o método reduce() para concatenar todas as strings em uma única string.
+
+const palavrasReduce = ["Olá", "mundo", "como", "vai"];
+
+const resultado = palavrasReduce.reduce((acumulador, palavra) => {
+    return acumulador + " " + palavra;
+}, "");
+
+console.log(resultado);
 
 // 11- Dado um array de objetos representando despesas com propriedades como valor e categoria, use o método reduce() para calcular o total de despesas de uma categoria específica.
 
+const despesas = [
+    { valor: 50, categoria: "Alimentação" },
+    { valor: 30, categoria: "Transporte" },
+    { valor: 20, categoria: "Alimentação" },
+    { valor: 15, categoria: "Outros" },
+    { valor: 40, categoria: "Transporte" }
+];
+
+const categoriaEspecifica = "Alimentação";
+
+const totalDespesasCategoria = despesas.reduce((acumulador, despesa) => {
+    if (despesa.categoria === categoriaEspecifica) {
+        return acumulador + despesa.valor;
+    }
+    return acumulador;
+}, 0);
+
 // 12- Dado um array de números, use o método reduce() para encontrar o maior número no array.
+
+const numerosReduceMaior = [12, 45, 6, 27, 8, 56, 34, 78];
+
+const maiorNumero = numerosReduceMaior.reduce((maior, numero) => {
+    return numero > maior ? numero : maior;
+}, numerosReduceMaior[0]); 
+
+
+console.log("O maior número é:", maiorNumero);
 
 // Laços de Repetiçoes
 // 13- Imprima os números de 1 a 10 utilizando um loop for.
 
+for (let i = 1; i < 11; i++) {
+    console.log(i);
+}
+
 // 14- Imprima os números pares de 1 a 20 utilizando um loop for.
-
+for (let i = 1; i < 21; i++) {
+    if (i % 2 === 0) {
+        console.log(i);
+    }
+}
 // 15- Calcule a soma dos números de 1 a 50 utilizando um loop for.
-
+let somaNumeros = 0;
+for (let i = 0; i < 51; i++) {
+    somaNumeros += i;
+    
+}
+console.log(somaNumeros);
 // 16- Imprima a tabuada do 7 utilizando um loop for.
-
+let tabuadaSete = 0;
+for (let i = 1; i < 11; i++) {
+    tabuadaSete = (i * 7);
+    console.log(`7 x ${i} = ${tabuadaSete}`)
+}
 // 17- Escreva um programa que solicite ao usuário um número e imprima a sequência de números de 1 até o número inserido, utilizando um loop for.
-
+let numeroUsuario = 22;
+for (let i = 0; i <= numeroUsuario; i++) {
+    console.log(i);
+}
 // 18- Escreva um programa que solicite ao usuário um número e verifique se ele é primo.
+function ehPrimo(numero) {
+    if (numero <= 1) {
+        return false;
+    }
+    
+    for (let i = 2; i <= Math.sqrt(numero); i++) {
+        if (numero % i === 0) {
+        return false;
+        }
+    }
+    
+    return true;
+}
 
+// const numeroDigitado = parseInt(prompt("Digite um número:"));
+
+// if (ehPrimo(numeroDigitado)) {
+//     console.log(`${numeroDigitado} é um número primo.`);
+// } else {
+//     console.log(`${numeroDigitado} não é um número primo.`);
+// }
 // 19- Crie um programa que gere a sequência de Fibonacci até o décimo termo. (Dica: o próximo termo é a soma dos dois termos anteriores)
+
+function fibonacciAteDecimoTermo() {
+    const sequencia = [0, 1];
+
+    for (let i = 2; i < 10; i++) {
+        const proximoTermo = sequencia[i - 1] + sequencia[i - 2];
+        sequencia.push(proximoTermo);
+    }
+
+    return sequencia;
+}
+
+
+const sequenciaFibonacci = fibonacciAteDecimoTermo();
+console.log(`A sequencia de Fibonacci até o décimo termo é ${sequenciaFibonacci}`)
 
 // 20- Crie um programa que solicite ao usuário um número e calcule o fatorial desse número.
 
+function calcularFatorial(numero) {
+    if (numero === 0 || numero === 1) {
+        return 1;
+    }
+    
+    let fatorial = 1;
+    for (let i = 2; i <= numero; i++) {
+      fatorial *= i;
+    }
+    
+    return fatorial;
+}
+
+const numeroDigitadoFatorial = 23;
+const fatorialCalculado = calcularFatorial(numeroDigitadoFatorial);
+console.log(`O fatorial do ${numeroDigitadoFatorial} é ${fatorialCalculado}`)
+
 // 21- Escreva um programa que imprima a seguinte série: 1, 3, 6, 10, 15, 21, ..., onde cada número é a soma dos números naturais consecutivos.
+function calcularTermoTriangular(n) {
+    return (n * (n + 1)) / 2;
+}
+const numeroDeTermos = 10; 
+
+for (let i = 1; i <= numeroDeTermos; i++) {
+    const termo = calcularTermoTriangular(i);
+    process.stdout.write(termo.toString()); // Usamos process.stdout.write() para imprimir sem quebra de linha
+    
+    if (i < numeroDeTermos) {
+        process.stdout.write(", ");
+    }
+}
 
 // 22- Crie um programa que encontre e imprima todos os números perfeitos de 1 a 1000. Um número perfeito é aquele cuja soma de seus divisores (excluindo ele mesmo) é igual ao próprio número.
 
+function ehNumeroPerfeito(numero) {
+    let somaDivisores = 0;
+
+    for (let i = 1; i <= numero / 2; i++) {
+        if (numero % i === 0) {
+        somaDivisores += i;
+        }
+    }
+
+    return somaDivisores === numero;
+}
+
+console.log("Números perfeitos de 1 a 1000:");
+
+for (let i = 1; i <= 1000; i++) {
+    if (ehNumeroPerfeito(i)) {
+        console.log(i);
+    }
+}
+
 // 23- Crie um jogo em que o computador escolhe um número aleatório entre 1 e 100, e o jogador deve adivinhar qual é esse número. O jogo deve fornecer dicas informando se o número a ser adivinhado é maior ou menor do que o palpite do jogador, e o jogo deve continuar até que o jogador acerte o número.
+
+
+function gerarNumeroAleatorio() {
+    return Math.floor(Math.random() * 100) + 1;
+}
+
+
+const numeroParaAdivinhar = gerarNumeroAleatorio();
+
+
+let tentativas = 0;
+let palpite;
+
+while (palpite !== numeroParaAdivinhar) {
+    palpite = parseInt(prompt("Digite seu palpite (entre 1 e 100):"));
+    
+    if (isNaN(palpite) || palpite < 1 || palpite > 100) {
+        console.log("Por favor, digite um número válido entre 1 e 100.");
+        continue;
+    }
+    
+    tentativas++;
+    
+    if (palpite < numeroParaAdivinhar) {
+        console.log("O número é maior. Tente novamente.");
+    } else if (palpite > numeroParaAdivinhar) {
+        console.log("O número é menor. Tente novamente.");
+    }
+}
+
+
+console.log(`Parabéns! Você acertou o número ${numeroParaAdivinhar} em ${tentativas} tentativas.`);
+
 
 // 24- Crie um programa que gere a sequência de números de Fibonacci usando um loop while até que o próximo termo seja maior que 1000.
 
+function fibonacciSequence() {
+    const sequence = [0, 1];
+    
+    while (sequence[sequence.length - 1] + sequence[sequence.length - 2] <= 1000) {
+        const nextTerm = sequence[sequence.length - 1] + sequence[sequence.length - 2];
+        sequence.push(nextTerm);
+    }
+    
+    return sequence;
+}
+
+const fibonacciSeq = fibonacciSequence();
+console.log("Sequência de Fibonacci até o próximo termo maior que 1000:");
+console.log(fibonacciSeq);
+
 // 25- Escreva um programa que calcule a média de uma lista de números. O usuário deve fornecer quantos números deseja inserir, e em seguida, inserir os números.
 
+function calcularMedia(listaNumeros) {
+    if (listaNumeros.length === 0) {
+        return null;
+    }
+    const soma = listaNumeros.reduce((acc, num) => acc + num, 0);
+    const media = soma / listaNumeros.length;
+    return media;
+}
+
+function interacaoUsuario() {
+    const numElementos = parseInt(prompt("Digite quantos números deseja inserir:"));
+    const numeros = [];
+
+    for (let i = 0; i < numElementos; i++) {
+        const numero = parseFloat(prompt(`Digite o número ${i + 1}:`));
+        numeros.push(numero);
+    }
+
+    const media = calcularMedia(numeros);
+
+    if (media !== null) {
+        console.log(`A média dos números inseridos é: ${media}`);
+    } else {
+        console.log("Nenhum número foi inserido.");
+    }
+}
+
+interacaoUsuario();
+
 // 26- Escreva um programa que peça ao usuário para adivinhar um número secreto entre 1 e 100. O programa deve fornecer dicas como "maior" ou "menor" até que o jogador adivinhe corretamente.
+
+function adivinharNumeroSecreto() {
+    const numeroSecreto = Math.floor(Math.random() * 100) + 1;
+    let tentativas = 0;
+
+    while (true) {
+        const palpite = parseInt(prompt("Adivinhe o número secreto (entre 1 e 100):"));
+        tentativas++;
+
+        if (palpite === numeroSecreto) {
+        console.log(`Parabéns! Você adivinhou o número secreto ${numeroSecreto} em ${tentativas} tentativas.`);
+        break;
+        } else if (palpite < numeroSecreto) {
+        console.log("Tente novamente. O número secreto é maior.");
+        } else {
+        console.log("Tente novamente. O número secreto é menor.");
+        }
+    }
+}
+
+adivinharNumeroSecreto();
 
 // 27- Crie um programa que gere a sequência de números primos até um número fornecido pelo usuário.
 
