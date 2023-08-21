@@ -1,6 +1,5 @@
 // Lista de palavras para o jogo
-// const listaPalavras = ['gato', 'cachorro', 'elefante', 'leao', 'tigre', 'girafa'];
-const listaPalavras = ['gato'];
+const listaPalavras = ['gato', 'cachorro', 'elefante', 'leao', 'tigre', 'girafa'];
 let letrasTentadas = [];
 
 // Escolhe uma palavra aleatória da lista
@@ -81,6 +80,9 @@ function adivinhar() {
 
     // Atualizar o display da palavra
     displayPalavra.textContent = arrayExibicao.join(' ');
+
+    const letrasTentadasDisplay = letrasTentadas.join(', ');
+    document.getElementById('letras-tentadas').textContent = `Letras tentadas: ${letrasTentadasDisplay}`;
 
     if (result[0] == -1) {
         mensagem.textContent = result[1];
