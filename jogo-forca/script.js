@@ -11,7 +11,7 @@ let arrayPalavra = palavraEscolhida.split('');
 
 // Elementos HTML
 const displayPalavra = document.getElementById('display-palavra');
-let tentativasRestantes = document.getElementById('tentativas-restantes');
+const tentativasRestantes = document.getElementById('tentativas-restantes');
 const entradaAdivinhacao = document.getElementById('entrada-adivinhacao');
 const botaoAdivinhacao = document.getElementById('botao-adivinhacao');
 const mensagem = document.getElementById('mensagem');
@@ -38,21 +38,23 @@ function verificar(adivinhacao) {
     letrasTentadas.push(adivinhacao)
 
     // Verificar se a letra está na palavra
-    let changed = false
+    let verificar = false
     for (let i = 0; i < arrayPalavra.length; i++) {
         if (arrayPalavra[i] === adivinhacao) {
             arrayExibicao[i] = adivinhacao;
-            changed = true;
+            verificar = true;
         }
     }
+    if (!verificar) {
+        tentativas--;
+        tentativasRestantes.textContent = tentativas;
+    }
     console.log(arrayExibicao)
-    return [changed, changed ? 'Boa! Continue adivinhando.' : 'Tente novamente.'];
+    return [verificar, verificar ? 'Boa! Continue adivinhando.' : 'Tente novamente.'];
 }
 
 // Função de processar tentativa
 function processarTentativa(msg) {
-    tentativas--;
-    tentativasRestantes.textContent = tentativas;
 
     if (tentativas === 0) {
         msg = 'Você perdeu! A palavra era: ' + palavraEscolhida;
@@ -69,7 +71,7 @@ function processarTentativa(msg) {
     return msg;
 }
 
-// Função de adivinhar
+// Função de adivinhar - ativada pelo onClick no button "Adivinhar".
 function adivinhar() {
     const adivinhacao = entradaAdivinhacao.value.toLowerCase();
     // Limpar a entrada
