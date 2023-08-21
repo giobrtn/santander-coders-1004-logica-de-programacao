@@ -1,9 +1,53 @@
 // Callback
 // Exercício 1: Callback Básico Crie uma função chamada executarCallback que recebe uma função de callback como argumento e a executa.
 
+function executarCallback(callback) {
+    callback();
+}
+
+function minhaFuncaoCallback() {
+    console.log("A função de callback foi executada");
+}
+
+executarCallback(minhaFuncaoCallback);
+
 // Exercício 2: Manipulação de Array Crie uma função chamada dobrarNumeros que recebe um array de números e uma função de callback. A função dobrarNumeros deve aplicar a função de callback a cada elemento do array e retornar um novo array com os elementos dobrados.
 
+function dobrarNumeros(array, callback) {
+    var novoArray = [];
+    for (var i = 0; i < array.length; i++) {
+        novoArray.push(callback(array[i]));
+    }
+    return novoArray;
+}
+
+function dobrar(numero) {
+    return numero * 2;
+}
+
+var numeros = [1, 2, 3, 4, 5];
+var novoArrayDobrado = dobrarNumeros(numeros, dobrar);
+console.log("Novo array dobrado:", novoArrayDobrado);
+
 // Exercício 3: Filtragem com Callback Crie uma função chamada filtrarPalavras que recebe um array de palavras e uma função de callback. A função filtrarPalavras deve retornar um novo array contendo apenas as palavras que atendem ao critério da função de callback.
+
+function filtrarPalavras(array, callback) {
+    var novoArrayFiltrado = [];
+    for (var i = 0; i < array.length; i++) {
+        if (callback(array[i])) {
+            novoArrayFiltrado.push(array[i]);
+        }
+    }
+    return novoArrayFiltrado;
+}
+
+function criterioDeFiltro(palavra) {
+    return palavra.length >= 5;
+}
+
+var palavras = ["apple", "banana", "cherry", "grape", "orange", "watermelon"];
+var palavrasFiltradas = filtrarPalavras(palavras, criterioDeFiltro);
+console.log("Palavras filtradas:", palavrasFiltradas);
 
 // Exercício 4: Ordenação com Callback Crie uma função chamada ordenarNumeros que recebe um array de números e uma função de callback para determinar a ordem de ordenação. A função ordenarNumeros deve retornar um novo array com os números ordenados de acordo com o critério da função de callback.
 
